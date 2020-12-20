@@ -1,0 +1,64 @@
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.csprojAssemblyReference.cache
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.AssemblyInfoInputs.cache
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.AssemblyInfo.cs
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.csproj.CoreCompileInputs.cache
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black Bishop.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black King.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black Knight.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black Queen.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\Black Rook.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White Bishop.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White King.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White Knight.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White Queen.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\132 x 132\White Rook.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black Bishop.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black King.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black Knight.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black Queen.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\Black Rook.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White Bishop.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White King.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White Knight.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White Queen.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\80 x 80\White Rook.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Grey_Square.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Purple_Square.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.exe
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.deps.json
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.runtimeconfig.json
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.runtimeconfig.dev.json
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\RogueChess.pdb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Microsoft.VisualBasic.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\MonoGame.Framework.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.Direct2D1.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.Direct3D11.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.Direct3D9.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.DXGI.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.Mathematics.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.MediaFoundation.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.XAudio2.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\SharpDX.XInput.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\debian-x64\native\libuv.so
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\fedora-x64\native\libuv.so
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\opensuse-x64\native\libuv.so
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\osx\native\libuv.dylib
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\rhel-x64\native\libuv.so
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\win7-arm\native\libuv.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\win7-x64\native\libuv.dll
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\runtimes\win7-x86\native\libuv.dll
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.csproj.CopyComplete
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.dll
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.pdb
+C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.genruntimeconfig.cache
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\White Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Black Pawn.xnb

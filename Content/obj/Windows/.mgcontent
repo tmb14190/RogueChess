@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Bishop.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black King.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Knight.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Queen.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Rook.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White Bishop.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White King.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White Knight.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White Queen.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/White Rook.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black Bishop.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black King.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black Knight.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black Queen.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/Black Rook.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Bishop.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White King.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Knight.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Queen.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Rook.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/Black Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/Grey_Square.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/Purple_Square.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/White Pawn.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
