@@ -50,6 +50,9 @@ namespace RogueChess
 
             // TODO: Add your update logic here
 
+            FindPieceOnClick();
+            FindDestinationOnRelease();
+
             base.Update(gameTime);
         }
 
@@ -108,6 +111,36 @@ namespace RogueChess
             board.AddPiece("e1", new King(Content, "WHITE", (132, 132)));
 
 
+
+        }
+
+        public void FindPieceOnClick()
+        {
+            bool success = false;
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && IsMouseInsideWindow() && this.IsActive)
+            {
+                int index = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
+                if (index != -1)
+                    success = true;
+
+                if (success)
+                {
+                    IPiece piece = board.GetPiece(index);
+
+                    // connect texture to mouse
+                }
+            }
+
+            bool IsMouseInsideWindow()
+            {
+                MouseState ms = Mouse.GetState();
+                Point pos = new Point(ms.X, ms.Y);
+                return GraphicsDevice.Viewport.Bounds.Contains(pos);
+            }
+
+        }
+
+        public void FindDestinationOnRelease() {
 
         }
 

@@ -123,5 +123,58 @@ namespace RogueChess
             if (map.Count == original_size)
                 Debug.WriteLine("No such square as " + position);
         }
+
+        public IPiece GetPiece(int index)
+        {
+            return map[notation[index]];
+        }
+
+        public int GetSquareIndexFromXY(int x, int y)
+        {
+            // first rectangle x y at 240, 80, each size 100, 100, 64 rects
+            // 0 = 0, 0 (0 - 99, 0 - 99 but we can round down) 
+            // 1 = 1, 0 (100 - 199, 0 - 99 but we can round down)
+            // 2 = 2, 0
+            // 3 = 3, 0
+            // 4 = 4, 0
+            // 5 = 5, 0
+            // 6 = 6, 0
+            // 7 = 7, 0
+            // 8 = 0, 1 (0 - 99, 100 - 199 but we can round down)
+            // 63 = 7, 7 (700 - 799, 700 - 799 but we can round down)
+            x = x - 240;
+            y = y - 80;
+            string sX = x.ToString();
+            string sY = y.ToString();
+            bool workX = true;
+            bool workY = true;
+
+            if (sX.Length == 2)
+                x = 0;
+            else
+            {
+                workX = Int32.TryParse(sX[0].ToString(), out x);
+            }
+
+            if (sY.Length == 2)
+                y = 0;
+            else
+            {
+                workY = Int32.TryParse(sY[0].ToString(), out y);
+            }
+            // now x, y = 0 - 7
+
+            if (workX && workY && x >= 0 && x <= 7 && y >= 0 && y <= 7) {
+                y = y * 8;
+                int index = y + x;
+                Debug.WriteLine(index);
+                return index;
+            }
+            else
+            {
+                Debug.WriteLine("Not on the board");
+                return -1;
+            }
+        }
     }
 }

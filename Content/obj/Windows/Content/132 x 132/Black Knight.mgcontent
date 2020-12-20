@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/jackm/source/repos/RogueChess/Content/132 x 132/Black Knight.png</SourceFile>
-  <SourceTime>2020-12-19T18:52:00.3354455+00:00</SourceTime>
+  <SourceTime>2020-12-20T19:20:21.3231901+00:00</SourceTime>
   <DestFile>C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Content/132 x 132/Black Knight.xnb</DestFile>
-  <DestTime>2020-12-19T19:04:24.4738521+00:00</DestTime>
+  <DestTime>2020-12-20T19:22:55.273449+00:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
