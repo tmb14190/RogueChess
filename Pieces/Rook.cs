@@ -11,9 +11,13 @@ namespace RogueChess.Pieces
     class Rook : IPiece
     {
         Texture2D texture;
+        static string name = "Rook";
+        string colour;
 
         public Rook(ContentManager content, string colour, (int, int) size)
         {
+            this.colour = colour;
+
             string folder = "";
             if (size == (80, 80))
                 folder = "80 x 80\\";
@@ -53,6 +57,14 @@ namespace RogueChess.Pieces
         {
             return texture;
         }
+        public string GetName()
+        {
+            return name;
+        }
 
+        public string GetColour()
+        {
+            return colour;
+        }
     }
 }

@@ -15,6 +15,10 @@ namespace RogueChess
 
         Board board;
 
+        IPiece holdingPiece;
+
+        private Vector2 cursorPos;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -30,7 +34,7 @@ namespace RogueChess
         {
             // TODO: Add your initialization logic here
             board = new Board(Content);
-
+            holdingPiece = null;
 
             base.Initialize();
         }
@@ -50,8 +54,15 @@ namespace RogueChess
 
             // TODO: Add your update logic here
 
-            FindPieceOnClick();
-            FindDestinationOnRelease();
+            // update mouse position
+            cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+
+            // if piece is clicked
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && holdingPiece is null && IsMouseInsideWindow())
+                FindPieceOnClick();
+            // if piece is released
+            if (Mouse.GetState().LeftButton == ButtonState.Released && holdingPiece is object && IsMouseInsideWindow())
+                FindDestinationOnRelease();
 
             base.Update(gameTime);
         }
@@ -64,6 +75,12 @@ namespace RogueChess
             _spriteBatch.Begin();
 
             board.Draw(_spriteBatch);
+
+            if (holdingPiece is object)
+            {
+                _spriteBatch.Draw(holdingPiece.GetTexture(), new Rectangle((int)cursorPos.X - 40, (int)cursorPos.Y - 40, 100, 100), Color.White);
+
+            }
 
             _spriteBatch.End();
 
@@ -117,31 +134,42 @@ namespace RogueChess
         public void FindPieceOnClick()
         {
             bool success = false;
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && IsMouseInsideWindow() && this.IsActive)
-            {
-                int index = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
-                if (index != -1)
-                    success = true;
+            int index = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
+            if (index != -1)
+                success = true;
 
-                if (success)
+            if (success)
+            {
+                IPiece piece = board.GetPiece(index);
+
+                if (piece != null)
                 {
-                    IPiece piece = board.GetPiece(index);
+                    // piece successfully picked up
+                    holdingPiece = piece;
+                    Debug.WriteLine("Picked up " + piece.GetColour() + " " + piece.GetName());
 
                     // connect texture to mouse
                 }
-            }
+                else
+                {
+                    Debug.WriteLine("No piece on this square");
+                }
 
-            bool IsMouseInsideWindow()
-            {
-                MouseState ms = Mouse.GetState();
-                Point pos = new Point(ms.X, ms.Y);
-                return GraphicsDevice.Viewport.Bounds.Contains(pos);
             }
 
         }
 
         public void FindDestinationOnRelease() {
 
+            holdingPiece = null;
+
+        }
+
+        private bool IsMouseInsideWindow()
+        {
+            MouseState ms = Mouse.GetState();
+            Point pos = new Point(ms.X, ms.Y);
+            return (GraphicsDevice.Viewport.Bounds.Contains(pos) && this.IsActive);
         }
 
 

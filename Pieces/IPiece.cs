@@ -12,6 +12,8 @@ namespace RogueChess.Pieces
         public void Draw();
         public void Move();
         public Texture2D GetTexture();
+        public string GetName();
+        public string GetColour();
 
     }
 }

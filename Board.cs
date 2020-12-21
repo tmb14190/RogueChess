@@ -16,9 +16,9 @@ namespace RogueChess
     {
 
         public List<Rectangle> squares;
-        public Dictionary<string, IPiece> map;
         Texture2D purple;
         Texture2D grey;
+        public Dictionary<string, IPiece> map;
         private static string[] notation = {"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
                                             "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
                                             "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
@@ -117,7 +117,7 @@ namespace RogueChess
             foreach (string n in notation)
             {
                 if (position.Contains(n))
-                    map.Add(position, p);
+                    map[position] = p;
             }
 
             if (map.Count == original_size)
@@ -126,7 +126,13 @@ namespace RogueChess
 
         public IPiece GetPiece(int index)
         {
-            return map[notation[index]];
+            if (map.ContainsKey(notation[index]))
+            {
+                return map[notation[index]];
+            } else
+            {
+                return null;
+            }
         }
 
         public int GetSquareIndexFromXY(int x, int y)
