@@ -78,7 +78,7 @@ namespace RogueChess
 
             if (holdingPiece is object)
             {
-                _spriteBatch.Draw(holdingPiece.GetTexture(), new Rectangle((int)cursorPos.X - 40, (int)cursorPos.Y - 40, 100, 100), Color.White);
+                _spriteBatch.Draw(holdingPiece.GetTexture(), new Rectangle((int)cursorPos.X - 50, (int)cursorPos.Y - 50, 100, 100), Color.White);
 
             }
 
@@ -91,41 +91,41 @@ namespace RogueChess
         {
 
             // load pawns
-            for (int i = 97; i < 105; i++)
-                board.AddPiece((char)i + "7", new Pawn(Content, "BLACK", (132, 132)));
-            for (int i = 97; i < 105; i++)
-                board.AddPiece((char)i + "2", new Pawn(Content, "WHITE", (132, 132)));
+            for (int i = 8; i < 16; i++)
+                board.AddPiece(i, new Pawn(Content, "BLACK", (132, 132)));
+            for (int i = 48; i < 56; i++)
+                board.AddPiece(i, new Pawn(Content, "WHITE", (132, 132)));
 
             // load rooks
-            board.AddPiece("a8", new Rook(Content, "BLACK", (132, 132)));
-            board.AddPiece("h8", new Rook(Content, "BLACK", (132, 132)));
+            board.AddPiece(0, new Rook(Content, "BLACK", (132, 132)));
+            board.AddPiece(7, new Rook(Content, "BLACK", (132, 132)));
 
-            board.AddPiece("a1", new Rook(Content, "WHITE", (132, 132)));
-            board.AddPiece("h1", new Rook(Content, "WHITE", (132, 132)));
+            board.AddPiece(56, new Rook(Content, "WHITE", (132, 132)));
+            board.AddPiece(63, new Rook(Content, "WHITE", (132, 132)));
 
             // load knights
-            board.AddPiece("b8", new Knight(Content, "BLACK", (132, 132)));
-            board.AddPiece("g8", new Knight(Content, "BLACK", (132, 132)));
+            board.AddPiece(1, new Knight(Content, "BLACK", (132, 132)));
+            board.AddPiece(6, new Knight(Content, "BLACK", (132, 132)));
 
-            board.AddPiece("b1", new Knight(Content, "WHITE", (132, 132)));
-            board.AddPiece("g1", new Knight(Content, "WHITE", (132, 132)));
+            board.AddPiece(57, new Knight(Content, "WHITE", (132, 132)));
+            board.AddPiece(62, new Knight(Content, "WHITE", (132, 132)));
 
             // load bishops
-            board.AddPiece("c8", new Bishop(Content, "BLACK", (132, 132)));
-            board.AddPiece("f8", new Bishop(Content, "BLACK", (132, 132)));
+            board.AddPiece(2, new Bishop(Content, "BLACK", (132, 132)));
+            board.AddPiece(5, new Bishop(Content, "BLACK", (132, 132)));
 
-            board.AddPiece("c1", new Bishop(Content, "WHITE", (132, 132)));
-            board.AddPiece("f1", new Bishop(Content, "WHITE", (132, 132)));
+            board.AddPiece(58, new Bishop(Content, "WHITE", (132, 132)));
+            board.AddPiece(61, new Bishop(Content, "WHITE", (132, 132)));
 
             // load queens
-            board.AddPiece("d8", new Queen(Content, "BLACK", (132, 132)));
+            board.AddPiece(3, new Queen(Content, "BLACK", (132, 132)));
 
-            board.AddPiece("d1", new Queen(Content, "WHITE", (132, 132)));
+            board.AddPiece(59, new Queen(Content, "WHITE", (132, 132)));
 
             // load kings
-            board.AddPiece("e8", new King(Content, "BLACK", (132, 132)));
+            board.AddPiece(4, new King(Content, "BLACK", (132, 132)));
 
-            board.AddPiece("e1", new King(Content, "WHITE", (132, 132)));
+            board.AddPiece(60, new King(Content, "WHITE", (132, 132)));
 
 
 
@@ -160,9 +160,7 @@ namespace RogueChess
         }
 
         public void FindDestinationOnRelease() {
-
             holdingPiece = null;
-
         }
 
         private bool IsMouseInsideWindow()

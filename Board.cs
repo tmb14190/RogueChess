@@ -15,10 +15,10 @@ namespace RogueChess
     class Board
     {
 
-        public List<Rectangle> squares;
+        public List<Rectangle> squaresRects;
+        public IPiece[] squaresPieces;
         Texture2D purple;
         Texture2D grey;
-        public Dictionary<string, IPiece> map;
         private static string[] notation = {"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
                                             "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
                                             "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
@@ -30,13 +30,13 @@ namespace RogueChess
 
         public Board(ContentManager Content)
         {
-            squares = new List<Rectangle>();
-            squares = FillSquares(squares);
+            squaresRects = new List<Rectangle>();
+            squaresRects = FillSquares(squaresRects);
+            squaresPieces = new IPiece[64];
 
             purple = Content.Load<Texture2D>("Purple_square");
             grey = Content.Load<Texture2D>("Grey_square");
 
-            map = new Dictionary<string, IPiece>();
         }
 
         public void Update()
@@ -60,29 +60,26 @@ namespace RogueChess
                     if (flag % 2 == 0)
                     {
                         if (i % 2 == 0)
-                            sb.Draw(purple, squares[i], Color.White);
+                            sb.Draw(purple, squaresRects[i], Color.White);
                         else
-                            sb.Draw(grey, squares[i], Color.White);
+                            sb.Draw(grey, squaresRects[i], Color.White);
                     }
                     else
                     {
                         if (i % 2 == 0)
-                            sb.Draw(grey, squares[i], Color.White);
+                            sb.Draw(grey, squaresRects[i], Color.White);
                         else
-                            sb.Draw(purple, squares[i], Color.White);
+                            sb.Draw(purple, squaresRects[i], Color.White);
                     }
                 }
             }
 
             void DrawPieces()
             {
-
-                foreach (KeyValuePair<string, IPiece> entry in map)
+                for (int i = 0; i < 64; i++)
                 {
-                    // do something with entry.Value or entry.Key
-                    int index = Array.IndexOf(notation, entry.Key);
-
-                    sb.Draw(entry.Value.GetTexture(), squares[index], Color.White);
+                    if (squaresPieces[i] != null)
+                        sb.Draw(squaresPieces[i].GetTexture(), squaresRects[i], Color.White);
                 }
 
             }
@@ -111,28 +108,23 @@ namespace RogueChess
             return squares;
         }
 
-        public void AddPiece(string position, IPiece p)
+        public void AddPiece(int index, IPiece piece)
         {
-            int original_size = map.Count;
-            foreach (string n in notation)
-            {
-                if (position.Contains(n))
-                    map[position] = p;
-            }
+            if (index >= 0 && index <= 63)
+                squaresPieces[index] = piece;
 
-            if (map.Count == original_size)
-                Debug.WriteLine("No such square as " + position);
         }
 
         public IPiece GetPiece(int index)
         {
-            if (map.ContainsKey(notation[index]))
+            if (index >= 0 && index <= 63)
+                return squaresPieces[index];
+            else
             {
-                return map[notation[index]];
-            } else
-            {
+                Debug.WriteLine("No such square");
                 return null;
             }
+
         }
 
         public int GetSquareIndexFromXY(int x, int y)
