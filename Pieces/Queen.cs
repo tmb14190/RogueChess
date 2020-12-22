@@ -13,10 +13,14 @@ namespace RogueChess.Pieces
         Texture2D texture;
         static string name = "Queen";
         string colour;
+        List<int> moves;
+        string moveType;
 
         public Queen(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
+            moves = new List<int>();
+            moveType = "recursive";
 
             string folder = "";
             if (size == (80, 80))
@@ -40,17 +44,75 @@ namespace RogueChess.Pieces
             }
         }
 
-        public void Update()
+        public void AddMove(int move)
         {
-
+            moves.Add(move);
         }
-        public void Draw()
+        public List<int> AllowedMoves(int index)
         {
+            List<int> futureMoves = new List<int>();
 
-        }
-        public void Move()
-        {
+            // vertical
+            int i = index;
+            while (i > 7)
+            {
+                futureMoves.Add(i - 8);
+                i += -8;
+            }
+            i = index;
+            while (i < 56)
+            {
+                futureMoves.Add(i + 8);
+                i += 8;
+            }
 
+            // left side
+            i = index;
+            while (i % 8 != 0)
+            {
+                futureMoves.Add(i - 1);
+                i += -1;
+            }
+
+            // right side
+            i = index;
+            while (i % 8 != 7)
+            {
+                futureMoves.Add(i + 1);
+                i += 1;
+            }
+
+            // left side
+            i = index;
+            while (i % 8 != 0 && i > 7)
+            {
+                futureMoves.Add(i - 9);
+                i += -9;
+            }
+
+            i = index;
+            while (i % 8 != 0 && i < 56)
+            {
+                futureMoves.Add(i + 7);
+                i += 7;
+            }
+
+            // right side
+            i = index;
+            while (i % 8 != 7 && i > 7)
+            {
+                futureMoves.Add(i - 7);
+                i += -7;
+            }
+
+            i = index;
+            while (i % 8 != 7 && i < 56)
+            {
+                futureMoves.Add(i + 9);
+                i += 9;
+            }
+
+            return futureMoves;
         }
 
         public Texture2D GetTexture()
@@ -65,6 +127,10 @@ namespace RogueChess.Pieces
         public string GetColour()
         {
             return colour;
+        }
+        public string GetMoveType()
+        {
+            return moveType;
         }
     }
 }

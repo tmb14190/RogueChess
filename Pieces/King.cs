@@ -13,10 +13,14 @@ namespace RogueChess.Pieces
         Texture2D texture;
         static string name = "King";
         string colour;
+        List<int> moves;
+        string moveType;
 
         public King(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
+            moves = new List<int>();
+            moveType = "single";
 
             string folder = "";
             if (size == (80, 80))
@@ -40,17 +44,43 @@ namespace RogueChess.Pieces
             }
         }
 
-        public void Update()
+        public void AddMove(int move)
         {
-
+            moves.Add(move);
         }
-        public void Draw()
+        public List<int> AllowedMoves(int index)
         {
+            List<int> futureMoves = new List<int>();
 
-        }
-        public void Move()
-        {
+            // vertical 
+            if (index > 7)
+                futureMoves.Add(index - 8);
+            if (index < 56)
+                futureMoves.Add(index + 8);
 
+            // left side
+            if (index % 8 != 0)
+            {
+                if (index > 7)
+                    futureMoves.Add(index - 9);
+                if (index < 56)
+                    futureMoves.Add(index + 7);
+                futureMoves.Add(index - 1);
+            }
+
+            // right side
+            if (index % 8 != 7)
+            {
+                futureMoves.Add(index + 1);
+                if (index > 7)
+                    futureMoves.Add(index - 7);
+                if (index < 56)
+                    futureMoves.Add(index + 9);
+            }
+
+            // Castle
+
+            return futureMoves;
         }
 
         public Texture2D GetTexture()
@@ -65,6 +95,10 @@ namespace RogueChess.Pieces
         public string GetColour()
         {
             return colour;
+        }
+        public string GetMoveType()
+        {
+            return moveType;
         }
     }
 }

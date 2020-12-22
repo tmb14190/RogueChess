@@ -62,3 +62,4 @@ C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.pdb
 C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.genruntimeconfig.cache
 C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\White Pawn.xnb
 C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Black Pawn.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Green_Square.xnb

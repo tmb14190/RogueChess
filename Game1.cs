@@ -16,6 +16,8 @@ namespace RogueChess
         Board board;
 
         IPiece holdingPiece;
+        int holdingIndex;
+        List<int> holdingMoves;
 
         private Vector2 cursorPos;
 
@@ -35,6 +37,8 @@ namespace RogueChess
             // TODO: Add your initialization logic here
             board = new Board(Content);
             holdingPiece = null;
+            holdingIndex = -1;
+            holdingMoves = new List<int>();
 
             base.Initialize();
         }
@@ -78,8 +82,10 @@ namespace RogueChess
 
             if (holdingPiece is object)
             {
-                _spriteBatch.Draw(holdingPiece.GetTexture(), new Rectangle((int)cursorPos.X - 50, (int)cursorPos.Y - 50, 100, 100), Color.White);
+                foreach (int move in holdingMoves)
+                    board.DrawMove(_spriteBatch, move);
 
+                _spriteBatch.Draw(holdingPiece.GetTexture(), new Rectangle((int)cursorPos.X - 50, (int)cursorPos.Y - 50, 100, 100), Color.White);
             }
 
             _spriteBatch.End();
@@ -146,9 +152,14 @@ namespace RogueChess
                 {
                     // piece successfully picked up
                     holdingPiece = piece;
+                    holdingIndex = index;
                     Debug.WriteLine("Picked up " + piece.GetColour() + " " + piece.GetName());
 
-                    // connect texture to mouse
+                    // get possible moves
+                    holdingMoves = board.GetPossibleMoves(index, piece);
+
+                    // remove piece while its hovering
+                    board.RemovePiece(index);
                 }
                 else
                 {
@@ -159,11 +170,35 @@ namespace RogueChess
 
         }
 
-        public void FindDestinationOnRelease() {
+        public void FindDestinationOnRelease()
+        {
+            bool success = false;
+            int newIndex = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
+
+            if (newIndex != -1)
+                success = true;
+
+            if (success)
+            {
+                // check if move is aok
+                if (holdingMoves.Contains(newIndex))
+                    // add piece to new square
+                    board.AddPiece(newIndex, holdingPiece);
+                else
+                    board.ReturnPiece(holdingIndex, holdingPiece);
+
+            } else
+            {
+                // invalid move return piece
+                board.ReturnPiece(holdingIndex, holdingPiece);
+            }
+
             holdingPiece = null;
+            holdingIndex = -1;
+            holdingMoves = new List<int>();
         }
 
-        private bool IsMouseInsideWindow()
+            private bool IsMouseInsideWindow()
         {
             MouseState ms = Mouse.GetState();
             Point pos = new Point(ms.X, ms.Y);

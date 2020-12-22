@@ -29,11 +29,13 @@
     <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Queen.png</File>
     <File>C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Rook.png</File>
     <File>C:/Users/jackm/source/repos/RogueChess/Content/Black Pawn.png</File>
+    <File>C:/Users/jackm/source/repos/RogueChess/Content/Green_Square.png</File>
     <File>C:/Users/jackm/source/repos/RogueChess/Content/Grey_Square.png</File>
     <File>C:/Users/jackm/source/repos/RogueChess/Content/Purple_Square.png</File>
     <File>C:/Users/jackm/source/repos/RogueChess/Content/White Pawn.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

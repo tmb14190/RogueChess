@@ -13,10 +13,14 @@ namespace RogueChess.Pieces
         Texture2D texture;
         static string name = "Pawn";
         string colour;
+        List<int> moves;
+        string moveType;
 
         public Pawn(ContentManager content, string colour, (int,int) size)
         {
             this.colour = colour;
+            moves = new List<int>();
+            moveType = "single";
 
             string folder = "";
             if (size == (80, 80))
@@ -38,17 +42,31 @@ namespace RogueChess.Pieces
             }
         }
 
-        public void Update()
+        public void AddMove(int move)
         {
-
+            moves.Add(move);
         }
-        public void Draw()
-        {
 
-        }
-        public void Move()
+        public List<int> AllowedMoves(int index)
         {
+            List<int> futureMoves = new List<int>();
 
+            if (this.colour == "BLACK")
+                futureMoves.Add(index + 8);
+            else if (this.colour == "WHITE")
+                futureMoves.Add(index - 8);
+
+            if (moves.Count == 1)
+            {
+                if (this.colour == "BLACK")
+                    futureMoves.Add(index + 16);
+                else if (this.colour == "WHITE")
+                    futureMoves.Add(index - 16);
+            }
+
+            // En passant
+
+            return futureMoves;
         }
 
         public Texture2D GetTexture()
@@ -65,6 +83,9 @@ namespace RogueChess.Pieces
         {
             return colour;
         }
-
+        public string GetMoveType()
+        {
+            return moveType;
+        }
     }
 }

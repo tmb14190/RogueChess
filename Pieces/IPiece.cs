@@ -8,12 +8,13 @@ namespace RogueChess.Pieces
     interface IPiece
     {
 
-        public void Update();
-        public void Draw();
-        public void Move();
+        public void AddMove(int move);
+        public List<int> AllowedMoves(int index);
         public Texture2D GetTexture();
         public string GetName();
         public string GetColour();
+
+        public string GetMoveType();
 
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using RogueChess.Pieces;
 using System.Diagnostics;
+using System.Linq;
 
 namespace RogueChess
 {
@@ -15,10 +16,13 @@ namespace RogueChess
     class Board
     {
 
+        // We need a record of all moves
+
         public List<Rectangle> squaresRects;
         public IPiece[] squaresPieces;
         Texture2D purple;
         Texture2D grey;
+        Texture2D green;
         private static string[] notation = {"a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
                                             "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
                                             "a6", "b6", "c6", "d6", "e6", "f6", "g6", "h6",
@@ -36,6 +40,7 @@ namespace RogueChess
 
             purple = Content.Load<Texture2D>("Purple_square");
             grey = Content.Load<Texture2D>("Grey_square");
+            green = Content.Load<Texture2D>("Green_square");
 
         }
 
@@ -86,6 +91,12 @@ namespace RogueChess
 
         }
 
+        public void DrawMove(SpriteBatch sb, int index)
+        {
+            Debug.WriteLine(index);
+            sb.Draw(green, squaresRects[index], Color.White);
+        }
+
         public List<Rectangle> FillSquares(List<Rectangle> squares)
         {
 
@@ -110,8 +121,29 @@ namespace RogueChess
 
         public void AddPiece(int index, IPiece piece)
         {
-            if (index >= 0 && index <= 63)
+            if (index >= 0 && index <= 63) {
                 squaresPieces[index] = piece;
+
+                piece.AddMove(index);
+            }
+                
+
+        }
+
+        public void ReturnPiece(int index, IPiece piece)
+        {
+            if (index >= 0 && index <= 63)
+            {
+                squaresPieces[index] = piece;
+            }
+
+
+        }
+
+        public void RemovePiece(int index)
+        {
+            if (index >= 0 && index <= 63)
+                squaresPieces[index] = null;
 
         }
 
@@ -173,6 +205,29 @@ namespace RogueChess
                 Debug.WriteLine("Not on the board");
                 return -1;
             }
+        }
+
+        public List<int> GetPossibleMoves(int index, IPiece piece)
+        {
+
+            List<int> movements = piece.AllowedMoves(index);
+            string colour = piece.GetColour();
+            List<int> moves = new List<int>();
+
+            foreach (int move in movements)
+            {
+
+                // Checking for legal move (maybe make this a function)
+                // make sure destination square is empty or filled with opponent piece
+                if (squaresPieces[move] is null || colour != squaresPieces[move].GetColour())
+                        
+                    // check if piece doesnt go past board end
+
+                        
+                    moves.Add(move);
+            }
+
+            return moves;
         }
     }
 }

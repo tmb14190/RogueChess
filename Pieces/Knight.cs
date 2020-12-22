@@ -13,10 +13,14 @@ namespace RogueChess.Pieces
         Texture2D texture;
         static string name = "Knight";
         string colour;
+        List<int> moves;
+        string moveType;
 
         public Knight(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
+            moves = new List<int>();
+            moveType = "single";
 
             string folder = "";
             if (size == (80, 80))
@@ -40,17 +44,45 @@ namespace RogueChess.Pieces
             }
         }
 
-        public void Update()
+        public void AddMove(int move)
         {
-
+            moves.Add(move);
         }
-        public void Draw()
+        public List<int> AllowedMoves(int index)
         {
+            List<int> futureMoves = new List<int>();
 
-        }
-        public void Move()
-        {
+            // up
+            if (index % 8 != 7 && index > 16)
+                futureMoves.Add(index - 15);
+            if (index % 8 != 0 && index > 16)
+                futureMoves.Add(index - 17);
 
+            // left
+            if (index % 8 != 0 && index % 8 != 1)
+            {
+                if (index > 7)
+                    futureMoves.Add(index - 10);
+                if (index < 56)
+                    futureMoves.Add(index + 6);
+            }
+
+            // right
+            if (index % 8 != 7 && index % 8 != 6)
+            {
+                if (index > 7)
+                    futureMoves.Add(index - 6);
+                if (index < 56)
+                    futureMoves.Add(index + 10);
+            }
+
+            // down
+            if (index % 8 != 0 && index < 48)
+                futureMoves.Add(index + 15);
+            if (index % 8 != 7 && index < 48)
+                futureMoves.Add(index + 17);
+
+            return futureMoves;
         }
 
         public Texture2D GetTexture()
@@ -65,6 +97,10 @@ namespace RogueChess.Pieces
         public string GetColour()
         {
             return colour;
+        }
+        public string GetMoveType()
+        {
+            return moveType;
         }
     }
 }

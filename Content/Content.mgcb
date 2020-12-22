@@ -313,6 +313,18 @@
 /processorParam:TextureFormat=Color
 /build:Black Pawn.png
 
+#begin Green_Square.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Green_Square.png
+
 #begin Grey_Square.png
 /importer:TextureImporter
 /processor:TextureProcessor
