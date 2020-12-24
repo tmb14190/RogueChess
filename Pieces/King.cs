@@ -5,22 +5,25 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using System.Linq;
 
 namespace RogueChess.Pieces
 {
     class King : IPiece
     {
         Texture2D texture;
-        static string name = "King";
+        static string name = "KING";
         string colour;
         List<int> moves;
         string moveType;
+        List<string> buffs;
 
         public King(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
             moves = new List<int>();
-            moveType = "single";
+            buffs = new List<string>();
+            moveType = "SINGULAR";
 
             string folder = "";
             if (size == (80, 80))
@@ -48,23 +51,23 @@ namespace RogueChess.Pieces
         {
             moves.Add(move);
         }
+        public List<int> GetMoveHistory()
+        {
+            return moves;
+        }
         public List<int> AllowedMoves(int index)
         {
             List<int> futureMoves = new List<int>();
 
             // vertical 
-            if (index > 7)
-                futureMoves.Add(index - 8);
-            if (index < 56)
-                futureMoves.Add(index + 8);
+            futureMoves.Add(index - 8);
+            futureMoves.Add(index + 8);
 
             // left side
             if (index % 8 != 0)
             {
-                if (index > 7)
-                    futureMoves.Add(index - 9);
-                if (index < 56)
-                    futureMoves.Add(index + 7);
+                futureMoves.Add(index - 9);
+                futureMoves.Add(index + 7);
                 futureMoves.Add(index - 1);
             }
 
@@ -72,15 +75,34 @@ namespace RogueChess.Pieces
             if (index % 8 != 7)
             {
                 futureMoves.Add(index + 1);
-                if (index > 7)
-                    futureMoves.Add(index - 7);
-                if (index < 56)
-                    futureMoves.Add(index + 9);
+                futureMoves.Add(index - 7);
+                futureMoves.Add(index + 9);
             }
 
-            // Castle
+            if (moves.Count == 1 && buffs.Contains("CASTLE"))
+            {
+                futureMoves.Add(index + 2);
+                futureMoves.Add(index - 2);
+            }
+
+            foreach (int move in futureMoves.ToList())
+            {
+                if (move < 0 || move > 63)
+                    futureMoves.Remove(move);
+            }
 
             return futureMoves;
+        }
+
+        public void ApplyBuff(string buff)
+        {
+            if (buff == "CASTLE")
+                buffs.Add("CASTLE");
+        }
+
+        public List<string> GetBuffs()
+        {
+            return buffs;
         }
 
         public Texture2D GetTexture()
@@ -91,10 +113,13 @@ namespace RogueChess.Pieces
         {
             return name;
         }
-
         public string GetColour()
         {
             return colour;
+        }
+        public bool MatchColour(string colour)
+        {
+            return this.colour == colour;
         }
         public string GetMoveType()
         {

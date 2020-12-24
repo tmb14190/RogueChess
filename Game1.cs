@@ -15,6 +15,8 @@ namespace RogueChess
 
         Board board;
 
+        List<string> buffs;
+
         IPiece holdingPiece;
         int holdingIndex;
         List<int> holdingMoves;
@@ -34,11 +36,11 @@ namespace RogueChess
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             board = new Board(Content);
             holdingPiece = null;
             holdingIndex = -1;
             holdingMoves = new List<int>();
+            buffs = new List<string>();
 
             base.Initialize();
         }
@@ -47,16 +49,16 @@ namespace RogueChess
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
             InitialiseBoard();
+
+            buffs.Add("CASTLE");
+            board.AddBuffs(buffs);
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-
-            // TODO: Add your update logic here
 
             // update mouse position
             cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
@@ -75,7 +77,6 @@ namespace RogueChess
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
             _spriteBatch.Begin();
 
             board.Draw(_spriteBatch);
@@ -182,8 +183,11 @@ namespace RogueChess
             {
                 // check if move is aok
                 if (holdingMoves.Contains(newIndex))
+                {
                     // add piece to new square
                     board.AddPiece(newIndex, holdingPiece);
+                    board.CheckRulesNewGameState(newIndex, holdingIndex, Content);
+                }
                 else
                     board.ReturnPiece(holdingIndex, holdingPiece);
 

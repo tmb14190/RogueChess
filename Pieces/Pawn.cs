@@ -5,22 +5,25 @@ using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using System.Linq;
 
 namespace RogueChess.Pieces
 {
     class Pawn : IPiece
     {
         Texture2D texture;
-        static string name = "Pawn";
+        static string name = "PAWN";
         string colour;
         List<int> moves;
         string moveType;
+        List<string> buffs;
 
         public Pawn(ContentManager content, string colour, (int,int) size)
         {
             this.colour = colour;
             moves = new List<int>();
-            moveType = "single";
+            buffs = new List<string>();
+            moveType = "PAWN";
 
             string folder = "";
             if (size == (80, 80))
@@ -47,6 +50,11 @@ namespace RogueChess.Pieces
             moves.Add(move);
         }
 
+        public List<int> GetMoveHistory()
+        {
+            return moves;
+        }
+
         public List<int> AllowedMoves(int index)
         {
             List<int> futureMoves = new List<int>();
@@ -64,9 +72,22 @@ namespace RogueChess.Pieces
                     futureMoves.Add(index - 16);
             }
 
-            // En passant
+            foreach (int move in futureMoves.ToList())
+            {
+                if (move < 0 || move > 63)
+                    futureMoves.Remove(move);
+            }
 
             return futureMoves;
+        }
+        public void ApplyBuff(string buff)
+        {
+
+        }
+
+        public List<string> GetBuffs()
+        {
+            return buffs;
         }
 
         public Texture2D GetTexture()
@@ -82,6 +103,10 @@ namespace RogueChess.Pieces
         public string GetColour()
         {
             return colour;
+        }
+        public bool MatchColour(string colour)
+        {
+            return this.colour == colour;
         }
         public string GetMoveType()
         {

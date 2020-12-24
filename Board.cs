@@ -13,13 +13,13 @@ using System.Linq;
 namespace RogueChess
 {
 
-    class Board
+    public class Board
     {
 
         // We need a record of all moves
 
-        public List<Rectangle> squaresRects;
-        public IPiece[] squaresPieces;
+        public List<Rectangle> boardTiles;
+        public IPiece[] boardPieces;
         Texture2D purple;
         Texture2D grey;
         Texture2D green;
@@ -34,9 +34,9 @@ namespace RogueChess
 
         public Board(ContentManager Content)
         {
-            squaresRects = new List<Rectangle>();
-            squaresRects = FillSquares(squaresRects);
-            squaresPieces = new IPiece[64];
+            boardTiles = new List<Rectangle>();
+            boardTiles = FillSquares(boardTiles);
+            boardPieces = new IPiece[64];
 
             purple = Content.Load<Texture2D>("Purple_square");
             grey = Content.Load<Texture2D>("Grey_square");
@@ -65,16 +65,16 @@ namespace RogueChess
                     if (flag % 2 == 0)
                     {
                         if (i % 2 == 0)
-                            sb.Draw(purple, squaresRects[i], Color.White);
+                            sb.Draw(purple, boardTiles[i], Color.White);
                         else
-                            sb.Draw(grey, squaresRects[i], Color.White);
+                            sb.Draw(grey, boardTiles[i], Color.White);
                     }
                     else
                     {
                         if (i % 2 == 0)
-                            sb.Draw(grey, squaresRects[i], Color.White);
+                            sb.Draw(grey, boardTiles[i], Color.White);
                         else
-                            sb.Draw(purple, squaresRects[i], Color.White);
+                            sb.Draw(purple, boardTiles[i], Color.White);
                     }
                 }
             }
@@ -83,8 +83,8 @@ namespace RogueChess
             {
                 for (int i = 0; i < 64; i++)
                 {
-                    if (squaresPieces[i] != null)
-                        sb.Draw(squaresPieces[i].GetTexture(), squaresRects[i], Color.White);
+                    if (boardPieces[i] != null)
+                        sb.Draw(boardPieces[i].GetTexture(), boardTiles[i], Color.White);
                 }
 
             }
@@ -94,7 +94,7 @@ namespace RogueChess
         public void DrawMove(SpriteBatch sb, int index)
         {
             Debug.WriteLine(index);
-            sb.Draw(green, squaresRects[index], Color.White);
+            sb.Draw(green, boardTiles[index], Color.White);
         }
 
         public List<Rectangle> FillSquares(List<Rectangle> squares)
@@ -122,8 +122,7 @@ namespace RogueChess
         public void AddPiece(int index, IPiece piece)
         {
             if (index >= 0 && index <= 63) {
-                squaresPieces[index] = piece;
-
+                boardPieces[index] = piece;
                 piece.AddMove(index);
             }
                 
@@ -134,7 +133,7 @@ namespace RogueChess
         {
             if (index >= 0 && index <= 63)
             {
-                squaresPieces[index] = piece;
+                boardPieces[index] = piece;
             }
 
 
@@ -143,20 +142,25 @@ namespace RogueChess
         public void RemovePiece(int index)
         {
             if (index >= 0 && index <= 63)
-                squaresPieces[index] = null;
+                boardPieces[index] = null;
 
         }
 
         public IPiece GetPiece(int index)
         {
             if (index >= 0 && index <= 63)
-                return squaresPieces[index];
+                return boardPieces[index];
             else
             {
                 Debug.WriteLine("No such square");
                 return null;
             }
 
+        }
+
+        public void AddBuffs(List<string> buffs)
+        {
+            boardPieces = Rules.AddBuffs(boardPieces, buffs);
         }
 
         public int GetSquareIndexFromXY(int x, int y)
@@ -209,25 +213,12 @@ namespace RogueChess
 
         public List<int> GetPossibleMoves(int index, IPiece piece)
         {
+            return Rules.LegalMoves(index, piece, boardPieces);
+        }
 
-            List<int> movements = piece.AllowedMoves(index);
-            string colour = piece.GetColour();
-            List<int> moves = new List<int>();
-
-            foreach (int move in movements)
-            {
-
-                // Checking for legal move (maybe make this a function)
-                // make sure destination square is empty or filled with opponent piece
-                if (squaresPieces[move] is null || colour != squaresPieces[move].GetColour())
-                        
-                    // check if piece doesnt go past board end
-
-                        
-                    moves.Add(move);
-            }
-
-            return moves;
+        public void CheckRulesNewGameState(int destinationIndex, int originIndex, ContentManager content)
+        {
+            boardPieces = Rules.ApplyRulesNewGameState(boardPieces, destinationIndex, originIndex, content);
         }
     }
 }

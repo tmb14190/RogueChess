@@ -11,16 +11,18 @@ namespace RogueChess.Pieces
     class Knight : IPiece
     {
         Texture2D texture;
-        static string name = "Knight";
+        static string name = "KNIGHT";
         string colour;
         List<int> moves;
         string moveType;
+        List<string> buffs;
 
         public Knight(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
             moves = new List<int>();
-            moveType = "single";
+            buffs = new List<string>();
+            moveType = "SINGULAR";
 
             string folder = "";
             if (size == (80, 80))
@@ -47,6 +49,10 @@ namespace RogueChess.Pieces
         public void AddMove(int move)
         {
             moves.Add(move);
+        }
+        public List<int> GetMoveHistory()
+        {
+            return moves;
         }
         public List<int> AllowedMoves(int index)
         {
@@ -84,6 +90,16 @@ namespace RogueChess.Pieces
 
             return futureMoves;
         }
+        public void ApplyBuff(string buff)
+        {
+            if (buff == "CASTLE")
+                buffs.Add("CASTLE");
+        }
+
+        public List<string> GetBuffs()
+        {
+            return buffs;
+        }
 
         public Texture2D GetTexture()
         {
@@ -97,6 +113,10 @@ namespace RogueChess.Pieces
         public string GetColour()
         {
             return colour;
+        }
+        public bool MatchColour(string colour)
+        {
+            return this.colour == colour;
         }
         public string GetMoveType()
         {
