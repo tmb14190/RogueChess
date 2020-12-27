@@ -158,9 +158,9 @@ namespace RogueChess
 
         }
 
-        public void AddBuffs(List<string> buffs)
-        {
-            boardPieces = Rules.AddBuffs(boardPieces, buffs);
+        public void AddBuff(int index, string buff)
+        { 
+            boardPieces[index] = Buffs.AddBuff(boardPieces[index], buff);
         }
 
         public int GetSquareIndexFromXY(int x, int y)

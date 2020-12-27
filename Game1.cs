@@ -51,8 +51,6 @@ namespace RogueChess
 
             InitialiseBoard();
 
-            buffs.Add("CASTLE");
-            board.AddBuffs(buffs);
         }
 
         protected override void Update(GameTime gameTime)
@@ -134,7 +132,11 @@ namespace RogueChess
 
             board.AddPiece(60, new King(Content, "WHITE", (132, 132)));
 
+            // load buffs white
+            board.AddBuff(60, "CASTLE");
 
+            // load buffs black
+            board.AddBuff(4, "CASTLE");
 
         }
 

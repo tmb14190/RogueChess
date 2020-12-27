@@ -9,17 +9,14 @@ namespace RogueChess
     public static class Buffs
     {
 
-        public static IPiece[] Castle(IPiece[] boardPieces)
+        public static IPiece AddBuff(IPiece piece, string buff)
         {
-            foreach (IPiece piece in boardPieces)
+            if (buff == "CASTLE")
             {
-                if (piece?.GetName() == "KING")
-                {
-                    piece.ApplyBuff("CASTLE");
-                }
+                piece.ApplyBuff("CASTLE");
             }
 
-            return boardPieces;
+            return piece;
         }
 
         public static List<int> CheckBuffedMoves(int index, IPiece piece, IPiece[] boardPieces, List<int> movements)

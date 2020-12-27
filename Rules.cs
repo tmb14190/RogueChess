@@ -8,13 +8,6 @@ namespace RogueChess
 {
     public static class Rules
     {
-        public static IPiece[] AddBuffs(IPiece[] boardPieces, List<string> buffs)
-        {
-            if (buffs.Contains("CASTLE"))
-                boardPieces = Buffs.Castle(boardPieces);
-            return boardPieces;
-        }
-
 
         public static IPiece[] ApplyRulesNewGameState(IPiece[] boardPieces, int destinationIndex, int originIndex, ContentManager content)
         {
