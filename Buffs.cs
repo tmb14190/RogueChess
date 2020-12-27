@@ -24,7 +24,9 @@ namespace RogueChess
 
         public static List<int> CheckBuffedMoves(int index, IPiece piece, IPiece[] boardPieces, List<int> movements)
         {
-
+            Debug.WriteLine("old");
+            foreach (int move in movements)
+                Debug.WriteLine(move);
             // if piece castle buffed
             foreach (string buff in piece.GetBuffs())
             {
@@ -38,14 +40,13 @@ namespace RogueChess
                         if (boardPieces[index + 3] != null)
                         {
                             if ((boardPieces[index + 3].GetName() == "ROOK" && boardPieces[index + 3].GetMoveHistory().Count == 1))
-                            {
                                 rook = true;
-                            }
                         }
                         // check path is clear
-                        if (boardPieces[index + 2] != null && boardPieces[index + 1] != null && rook == false)
+                        if (boardPieces[index + 2] != null || boardPieces[index + 1] != null || rook == false)
                         {
-                            movements.Remove(2);
+                            Debug.WriteLine("Removing Right");
+                            movements.Remove(index + 2);
                         }
                     }
 
@@ -56,14 +57,13 @@ namespace RogueChess
                         if (boardPieces[index - 4] != null)
                         {
                             if ((boardPieces[index - 4].GetName() == "ROOK" && boardPieces[index - 4].GetMoveHistory().Count == 1))
-                            {
                                 rook = true;
-                            }
                         }
                         // check path is clear
-                        if (boardPieces[index - 3] != null && boardPieces[index - 2] != null && boardPieces[index - 1] != null && rook == false)
+                        if (boardPieces[index - 3] != null || boardPieces[index - 2] != null || boardPieces[index - 1] != null || rook == false)
                         {
-                            movements.Remove(-2);
+                            Debug.WriteLine("Removing Left");
+                            movements.Remove(index - 2);
                         }
                     }
                 }
@@ -71,6 +71,10 @@ namespace RogueChess
 
 
             }
+
+            Debug.WriteLine("new");
+            foreach (int move in movements)
+                Debug.WriteLine(move);
 
             return movements;
         }
