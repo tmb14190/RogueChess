@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RogueChess.Pieces;
 using Microsoft.Xna.Framework.Content;
+using System.Diagnostics;
 
 namespace RogueChess
 {
@@ -13,24 +14,22 @@ namespace RogueChess
          */
         public static IPiece[] ApplyRulesNewGameState(IPiece[] boardPieces, int destinationIndex, int originIndex, ContentManager content)
         {
-            if (boardPieces[destinationIndex].GetName() == "PAWN")
-                boardPieces = PawnTransform(boardPieces, destinationIndex, content);
-
-            if (boardPieces[destinationIndex].GetName() == "KING" && boardPieces[destinationIndex].GetMoveHistory().Count == 2)
-                boardPieces = Buffs.ApplyBuffedMoves(boardPieces, destinationIndex, originIndex, "CASTLE");
-
-                return boardPieces;
-        }
-
-        /*
-         * 
-         */
-        public static IPiece[] PawnTransform(IPiece[] boardPieces, int changedIndex, ContentManager content)
-        {
-                if ((changedIndex >= 0 && changedIndex <= 7) || (changedIndex >= 56 && changedIndex <= 63))
+            foreach (string buff in boardPieces[destinationIndex].GetBuffs())
+            {
+                switch (buff)
                 {
-                    boardPieces[changedIndex] = new Queen(content, boardPieces[changedIndex].GetColour(), (132, 132));
+                    case "CASTLE":
+                        boardPieces = Buffs.ApplyBuffedMoves(content, boardPieces, destinationIndex, originIndex, "CASTLE");
+                        break;
+                    case "QUEEN UPGRADE":
+                        boardPieces = Buffs.ApplyBuffedMoves(content, boardPieces, destinationIndex, originIndex, "QUEEN UPGRADE");
+                        break;
+
+                    default:
+                        Debug.WriteLine("Unknown buff: " + buff);
+                        break;
                 }
+            }
 
             return boardPieces;
         }
@@ -46,72 +45,73 @@ namespace RogueChess
 
             movements = Buffs.CheckBuffedMoves(index, piece, boardPieces, movements);
 
-            if (piece.GetMoveType() == "SINGULAR")
+            switch (piece.GetMoveType())
             {
-                foreach (int move in movements)
-                {
-                    // make sure destination square is empty or filled with opponent piece
-                    if (boardPieces[move] is null || colour != boardPieces[move].GetColour())
-                        moves.Add(move);
-                }
-            }
-            else if (piece.GetMoveType() == "LINEAR")
-            {
-
-                bool removeBranch = false;
-
-                foreach (int move in movements)
-                {
-                    // if piece blocking mvoement branch skip
-                    if (removeBranch == true && move != -1)
-                        continue;
-                    else if (move == -1)
+                case "SINGULAR":
+                    foreach (int move in movements)
                     {
-                        removeBranch = false;
-                        continue;
-                    }
-
-                    // if piece not null then setup branch for removal. If is null then allow the move
-                    if (boardPieces[move] != null)
-                    {
-                        if (colour == boardPieces[move].GetColour())
-                        {
-                            removeBranch = true;
-                            continue;
-                        }
-                        else if (colour != boardPieces[move].GetColour())
-                        {
+                        // make sure destination square is empty or filled with opponent piece
+                        if (boardPieces[move] is null || colour != boardPieces[move].GetColour())
                             moves.Add(move);
-                            removeBranch = true;
+                    }
+                    break;
+                case "LINEAR":
+                    bool removeBranch = false;
+                    foreach (int move in movements)
+                    {
+                        // if piece blocking mvoement branch skip
+                        if (removeBranch == true && move != -1)
+                            continue;
+                        else if (move == -1)
+                        {
+                            removeBranch = false;
                             continue;
                         }
-
+                        // if piece not null then setup branch for removal. If is null then allow the move
+                        if (boardPieces[move] != null)
+                        {
+                            if (colour == boardPieces[move].GetColour())
+                            {
+                                removeBranch = true;
+                                continue;
+                            }
+                            else if (colour != boardPieces[move].GetColour())
+                            {
+                                moves.Add(move);
+                                removeBranch = true;
+                                continue;
+                            }
+                        }
+                        else
+                            moves.Add(move);
 
                     }
-                    else
-                        moves.Add(move);
+                    break;
+                case "PAWN": // the pawn exception, need to be remodelled as a buff
+                    if (movements.Count > 0) 
+                    {
+                        // attack moves
+                        if (movements[0] - 1 >= 0 && movements[0] + 1 <= 63)
+                        {
+                            if (boardPieces[movements[0] - 1]?.MatchColour(colour) == false)
+                                moves.Add(movements[0] - 1);
+                            if (boardPieces[movements[0] + 1]?.MatchColour(colour) == false)
+                                moves.Add(movements[0] + 1);
+                        }
 
-                }
-            }
-            else if (piece.GetMoveType() == "PAWN" && movements.Count > 0) // the pawn exception
-            {
-                // attack moves
-                if (movements[0] - 1 >= 0 && movements[0] + 1 <= 63)
-                {
-                    if (boardPieces[movements[0] - 1]?.MatchColour(colour) == false)
-                        moves.Add(movements[0] - 1);
-                    if (boardPieces[movements[0] + 1]?.MatchColour(colour) == false)
-                        moves.Add(movements[0] + 1);
-                }
-
-                foreach (int move in movements)
-                {
-                    // make sure destination square is empty
-                    if (boardPieces[move] is null)
-                        moves.Add(move);
-                    else
-                        break;
-                }
+                        foreach (int move in movements)
+                        {
+                            // make sure destination square is empty
+                            if (boardPieces[move] is null)
+                                moves.Add(move);
+                            else
+                                break;
+                        }
+                    }
+                    break;
+                default:
+                    Debug.WriteLine("Error " + piece.GetName() + " has no move type");
+                    break;
             }
 
             return moves;

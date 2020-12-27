@@ -21,7 +21,7 @@ namespace RogueChess.Pieces
         /*
          * 
          */
-        public void ApplyBuff(string buff);
+        public void AddBuff(string buff);
 
         /*
          * 

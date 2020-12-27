@@ -156,7 +156,8 @@ namespace RogueChess
         }
 
         /*
-         * 
+         *  Used to return a holding piece after an incorrect move
+         *  Works the same as AddPiece but doesnt update a pieces move history
          */
         public void ReturnPiece(int index, IPiece piece)
         {

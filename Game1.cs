@@ -155,9 +155,13 @@ namespace RogueChess
 
             // load buffs white
             board.AddBuff(60, "CASTLE");
+            for (int i = 48; i < 56; i++)
+                board.AddBuff(i, "QUEEN UPGRADE");
 
             // load buffs black
             board.AddBuff(4, "CASTLE");
+            for (int i = 8; i < 16; i++)
+                board.AddBuff(i, "QUEEN UPGRADE");
 
         }
 
