@@ -132,10 +132,9 @@ namespace RogueChess.Pieces
 
             return futureMoves;
         }
-        public void ApplyBuff(string buff)
+        public void AddBuff(string buff)
         {
-            if (buff == "CASTLE")
-                buffs.Add("CASTLE");
+            buffs.Add(buff);
         }
 
         public List<string> GetBuffs()

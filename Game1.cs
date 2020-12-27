@@ -8,6 +8,9 @@ using System.Diagnostics;
 
 namespace RogueChess
 {
+    /*
+     * 
+     */
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -23,6 +26,9 @@ namespace RogueChess
 
         private Vector2 cursorPos;
 
+        /*
+         * 
+         */
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -34,6 +40,9 @@ namespace RogueChess
             _graphics.PreferredBackBufferHeight = 960;
         }
 
+        /*
+         * 
+         */
         protected override void Initialize()
         {
             board = new Board(Content);
@@ -45,6 +54,9 @@ namespace RogueChess
             base.Initialize();
         }
 
+        /*
+         * 
+         */
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -53,6 +65,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
@@ -71,6 +86,9 @@ namespace RogueChess
             base.Update(gameTime);
         }
 
+        /*
+         * 
+         */
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -92,6 +110,9 @@ namespace RogueChess
             base.Draw(gameTime);
         }
 
+        /*
+         * 
+         */
         private void InitialiseBoard()
         {
 
@@ -140,6 +161,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void FindPieceOnClick()
         {
             bool success = false;
@@ -173,6 +197,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void FindDestinationOnRelease()
         {
             bool success = false;

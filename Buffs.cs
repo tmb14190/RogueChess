@@ -9,16 +9,24 @@ namespace RogueChess
     public static class Buffs
     {
 
+        /* 
+         * This is used as a middleman to make sure all buffs added to pieces are legit, removing validation needed by individual pieces
+        */
         public static IPiece AddBuff(IPiece piece, string buff)
         {
             if (buff == "CASTLE")
             {
                 piece.ApplyBuff("CASTLE");
             }
+            else if (buff == "CSATLE" || buff == "CASLTE")
+                Debug.WriteLine("miswrote castle when applying buff");
 
             return piece;
         }
 
+        /*
+         * 
+         */
         public static List<int> CheckBuffedMoves(int index, IPiece piece, IPiece[] boardPieces, List<int> movements)
         {
             Debug.WriteLine("old");
@@ -76,6 +84,9 @@ namespace RogueChess
             return movements;
         }
 
+        /*
+         * 
+         */
         public static IPiece[] ApplyBuffedMoves(IPiece[] boardPieces, int destinationIndex, int originIndex, string buff)
         {
             if (buff == "CASTLE")

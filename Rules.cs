@@ -8,7 +8,9 @@ namespace RogueChess
 {
     public static class Rules
     {
-
+        /*
+         * 
+         */
         public static IPiece[] ApplyRulesNewGameState(IPiece[] boardPieces, int destinationIndex, int originIndex, ContentManager content)
         {
             if (boardPieces[destinationIndex].GetName() == "PAWN")
@@ -20,6 +22,9 @@ namespace RogueChess
                 return boardPieces;
         }
 
+        /*
+         * 
+         */
         public static IPiece[] PawnTransform(IPiece[] boardPieces, int changedIndex, ContentManager content)
         {
                 if ((changedIndex >= 0 && changedIndex <= 7) || (changedIndex >= 56 && changedIndex <= 63))
@@ -30,8 +35,9 @@ namespace RogueChess
             return boardPieces;
         }
 
-
-
+        /*
+         * 
+         */
         public static List<int> LegalMoves(int index, IPiece piece, IPiece[] boardPieces)
         {
             List<int> movements = piece.AllowedMoves(index);

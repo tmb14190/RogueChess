@@ -12,7 +12,9 @@ using System.Linq;
 
 namespace RogueChess
 {
-
+    /*
+     * 
+     */
     public class Board
     {
 
@@ -32,6 +34,9 @@ namespace RogueChess
                                             "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2",
                                             "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1" };
 
+        /*
+         * 
+         */
         public Board(ContentManager Content)
         {
             boardTiles = new List<Rectangle>();
@@ -44,16 +49,25 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void Update()
         {
 
         }
 
+        /*
+         * 
+         */
         public void Draw(SpriteBatch sb)
         {
             DrawBoard();
             DrawPieces();
 
+            /*
+             * 
+             */
             void DrawBoard()
             {
                 int flag = 0;
@@ -79,6 +93,9 @@ namespace RogueChess
                 }
             }
 
+            /*
+             * 
+             */
             void DrawPieces()
             {
                 for (int i = 0; i < 64; i++)
@@ -91,12 +108,18 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void DrawMove(SpriteBatch sb, int index)
         {
             Debug.WriteLine(index);
             sb.Draw(green, boardTiles[index], Color.White);
         }
 
+        /*
+         * 
+         */
         public List<Rectangle> FillSquares(List<Rectangle> squares)
         {
 
@@ -119,6 +142,9 @@ namespace RogueChess
             return squares;
         }
 
+        /*
+         * 
+         */
         public void AddPiece(int index, IPiece piece)
         {
             if (index >= 0 && index <= 63) {
@@ -129,6 +155,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void ReturnPiece(int index, IPiece piece)
         {
             if (index >= 0 && index <= 63)
@@ -139,6 +168,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void RemovePiece(int index)
         {
             if (index >= 0 && index <= 63)
@@ -146,6 +178,9 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public IPiece GetPiece(int index)
         {
             if (index >= 0 && index <= 63)
@@ -158,11 +193,17 @@ namespace RogueChess
 
         }
 
+        /*
+         * 
+         */
         public void AddBuff(int index, string buff)
         { 
             boardPieces[index] = Buffs.AddBuff(boardPieces[index], buff);
         }
 
+        /*
+         * 
+         */
         public int GetSquareIndexFromXY(int x, int y)
         {
             // first rectangle x y at 240, 80, each size 100, 100, 64 rects
@@ -211,11 +252,17 @@ namespace RogueChess
             }
         }
 
+        /*
+         * 
+         */
         public List<int> GetPossibleMoves(int index, IPiece piece)
         {
             return Rules.LegalMoves(index, piece, boardPieces);
         }
 
+        /*
+         * 
+         */
         public void CheckRulesNewGameState(int destinationIndex, int originIndex, ContentManager content)
         {
             boardPieces = Rules.ApplyRulesNewGameState(boardPieces, destinationIndex, originIndex, content);
