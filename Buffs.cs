@@ -26,61 +26,71 @@ namespace RogueChess
         {
 
             // if piece castle buffed
-            if (piece.GetBuffs().Contains("CASTLE"))
+            foreach (string buff in piece.GetBuffs())
             {
-                if (movements.Contains(index + 2))
+
+                if (buff == "CASTLE")
                 {
-                    // check rook on right
-                    bool rook = false;
-                    if (boardPieces[index + 3] != null)
+                    if (movements.Contains(index + 2))
                     {
-                        if ((boardPieces[index + 3].GetName() == "ROOK" && boardPieces[index + 3].GetMoveHistory().Count == 1))
+                        // check rook on right
+                        bool rook = false;
+                        if (boardPieces[index + 3] != null)
                         {
-                            rook = true;
+                            if ((boardPieces[index + 3].GetName() == "ROOK" && boardPieces[index + 3].GetMoveHistory().Count == 1))
+                            {
+                                rook = true;
+                            }
+                        }
+                        // check path is clear
+                        if (boardPieces[index + 2] != null && boardPieces[index + 1] != null && rook == false)
+                        {
+                            movements.Remove(2);
                         }
                     }
-                    // check path is clear
-                    if (boardPieces[index + 2] != null && boardPieces[index + 1] != null && rook == false)
+
+                    if (movements.Contains(index - 2))
                     {
-                        movements.Remove(2);
+                        // check rook on left
+                        bool rook = false;
+                        if (boardPieces[index - 4] != null)
+                        {
+                            if ((boardPieces[index - 4].GetName() == "ROOK" && boardPieces[index - 4].GetMoveHistory().Count == 1))
+                            {
+                                rook = true;
+                            }
+                        }
+                        // check path is clear
+                        if (boardPieces[index - 3] != null && boardPieces[index - 2] != null && boardPieces[index - 1] != null && rook == false)
+                        {
+                            movements.Remove(-2);
+                        }
                     }
                 }
 
-                if (movements.Contains(index - 2))
-                {
-                    // check rook on left
-                    bool rook = false;
-                    if (boardPieces[index - 4] != null)
-                    {
-                        if ((boardPieces[index - 4].GetName() == "ROOK" && boardPieces[index - 4].GetMoveHistory().Count == 1))
-                        {
-                            rook = true;
-                        }
-                    }
-                    // check path is clear
-                    if (boardPieces[index - 3] != null && boardPieces[index - 2] != null && boardPieces[index - 1] != null && rook == false)
-                    {
-                        movements.Remove(-2);
-                    }
-                }
+
+
             }
 
             return movements;
         }
 
-        public static IPiece[] ApplyBuffedMoves(IPiece[] boardPieces, int destinationIndex, int originIndex)
+        public static IPiece[] ApplyBuffedMoves(IPiece[] boardPieces, int destinationIndex, int originIndex, string buff)
         {
-            if (originIndex - destinationIndex == 2)
+            if (buff == "CASTLE")
             {
-                boardPieces[originIndex - 1] = boardPieces[originIndex - 4];
-                boardPieces[originIndex - 1].AddMove(originIndex - 1);
-                boardPieces[originIndex - 4] = null;
-            }
-            if (originIndex - destinationIndex == -2)
-            {
-                boardPieces[originIndex + 1] = boardPieces[originIndex + 3];
-                boardPieces[originIndex + 1].AddMove(originIndex + 1);
-                boardPieces[originIndex + 3] = null;
+                if (originIndex - destinationIndex == 2)
+                {
+                    boardPieces[originIndex - 1] = boardPieces[originIndex - 4];
+                    boardPieces[originIndex - 1].AddMove(originIndex - 1);
+                    boardPieces[originIndex - 4] = null;
+                }
+                if (originIndex - destinationIndex == -2)
+                {
+                    boardPieces[originIndex + 1] = boardPieces[originIndex + 3];
+                    boardPieces[originIndex + 1].AddMove(originIndex + 1);
+                    boardPieces[originIndex + 3] = null;
+                }
             }
 
             return boardPieces;

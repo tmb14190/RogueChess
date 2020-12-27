@@ -22,7 +22,7 @@ namespace RogueChess
                 boardPieces = PawnTransform(boardPieces, destinationIndex, content);
 
             if (boardPieces[destinationIndex].GetName() == "KING" && boardPieces[destinationIndex].GetMoveHistory().Count == 2)
-                boardPieces = Buffs.ApplyBuffedMoves(boardPieces, destinationIndex, originIndex);
+                boardPieces = Buffs.ApplyBuffedMoves(boardPieces, destinationIndex, originIndex, "CASTLE");
 
                 return boardPieces;
         }
