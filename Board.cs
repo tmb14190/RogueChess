@@ -52,14 +52,6 @@ namespace RogueChess
         /*
          * 
          */
-        public void Update()
-        {
-
-        }
-
-        /*
-         * 
-         */
         public void Draw(SpriteBatch sb)
         {
             DrawBoard();
@@ -113,7 +105,6 @@ namespace RogueChess
          */
         public void DrawMove(SpriteBatch sb, int index)
         {
-            Debug.WriteLine(index);
             sb.Draw(green, boardTiles[index], Color.White);
         }
 
@@ -197,14 +188,6 @@ namespace RogueChess
         /*
          * 
          */
-        public void AddBuff(int index, string buff)
-        { 
-            boardPieces[index] = Buffs.AddBuff(boardPieces[index], buff);
-        }
-
-        /*
-         * 
-         */
         public int GetSquareIndexFromXY(int x, int y)
         {
             // first rectangle x y at 240, 80, each size 100, 100, 64 rects
@@ -243,7 +226,6 @@ namespace RogueChess
             if (workX && workY && x >= 0 && x <= 7 && y >= 0 && y <= 7) {
                 y = y * 8;
                 int index = y + x;
-                Debug.WriteLine(index);
                 return index;
             }
             else
@@ -253,20 +235,15 @@ namespace RogueChess
             }
         }
 
-        /*
-         * 
-         */
-        public List<int> GetPossibleMoves(int index, IPiece piece)
+        public int GetNumberOfPieces()
         {
-            return Rules.LegalMoves(index, piece, boardPieces);
-        }
-
-        /*
-         * 
-         */
-        public void CheckRulesNewGameState(int destinationIndex, int originIndex, ContentManager content)
-        {
-            boardPieces = Rules.ApplyRulesNewGameState(boardPieces, destinationIndex, originIndex, content);
+            int total = 0;
+            for (int i = 0; i < 64; i++)
+            {
+                if (boardPieces[i] != null)
+                    total += 1;
+            }
+            return total;
         }
     }
 }

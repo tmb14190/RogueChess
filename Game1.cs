@@ -23,6 +23,8 @@ namespace RogueChess
         IPiece holdingPiece;
         int holdingIndex;
         List<int> holdingMoves;
+        int[] lastMove;
+        string turn;
 
         private Vector2 cursorPos;
 
@@ -50,6 +52,8 @@ namespace RogueChess
             holdingIndex = -1;
             holdingMoves = new List<int>();
             buffs = new List<string>();
+            lastMove = new int[2];
+            turn = "WHITE";
 
             base.Initialize();
         }
@@ -154,15 +158,26 @@ namespace RogueChess
             board.AddPiece(60, new King(Content, "WHITE", (132, 132)));
 
             // load buffs white
-            board.AddBuff(60, "CASTLE");
+            AddBuff(60, "CASTLE");
             for (int i = 48; i < 56; i++)
-                board.AddBuff(i, "QUEEN UPGRADE");
+            {
+                AddBuff(i, "QUEEN UPGRADE");
+                AddBuff(i, "EN PASSANT");
+            }
 
             // load buffs black
-            board.AddBuff(4, "CASTLE");
+            AddBuff(4, "CASTLE");
             for (int i = 8; i < 16; i++)
-                board.AddBuff(i, "QUEEN UPGRADE");
+            {
+                AddBuff(i, "QUEEN UPGRADE");
+                AddBuff(i, "EN PASSANT");
+            }
 
+        }
+
+        private void AddBuff(int index, string buff)
+        {
+            board.boardPieces[index] = Buffs.AddBuff(board.boardPieces[index], "CASTLE");
         }
 
         /*
@@ -179,7 +194,7 @@ namespace RogueChess
             {
                 IPiece piece = board.GetPiece(index);
 
-                if (piece != null)
+                if (piece != null && piece.GetColour() == turn)
                 {
                     // piece successfully picked up
                     holdingPiece = piece;
@@ -187,7 +202,7 @@ namespace RogueChess
                     Debug.WriteLine("Picked up " + piece.GetColour() + " " + piece.GetName());
 
                     // get possible moves
-                    holdingMoves = board.GetPossibleMoves(index, piece);
+                    holdingMoves = Rules.LegalMoves(index, piece, board.boardPieces, lastMove);
 
                     // remove piece while its hovering
                     board.RemovePiece(index);
@@ -207,22 +222,37 @@ namespace RogueChess
         public void FindDestinationOnRelease()
         {
             bool success = false;
-            int newIndex = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
+            int destinationIndex = board.GetSquareIndexFromXY(Mouse.GetState().X, Mouse.GetState().Y);
 
-            if (newIndex != -1)
+            if (destinationIndex != -1)
                 success = true;
 
-            if (success)
+            if (success && holdingMoves.Contains(destinationIndex))
             {
-                // check if move is aok
-                if (holdingMoves.Contains(newIndex))
-                {
-                    // add piece to new square
-                    board.AddPiece(newIndex, holdingPiece);
-                    board.CheckRulesNewGameState(newIndex, holdingIndex, Content);
-                }
+                // gotta simulate the move to check if player checks themselves
+
+                // add piece to new square
+                board.AddPiece(destinationIndex, holdingPiece);
+                board.boardPieces = Rules.ApplyRulesNewGameState(board.boardPieces, destinationIndex, holdingIndex, Content);
+
+                // hold last move info (used by en passant alone atm)
+                lastMove[0] = holdingIndex;
+                lastMove[1] = destinationIndex;
+
+                Debug.WriteLine(holdingPiece.GetName() + " moved from " + holdingIndex.ToString() + " to " + destinationIndex.ToString());
+
+                // lets test checks
+                bool whiteCheck = Rules.IsCheck("WHITE", board.boardPieces, lastMove);
+                bool blackCheck = Rules.IsCheck("BLACK", board.boardPieces, lastMove);
+                if (whiteCheck)
+                    Debug.WriteLine("White Checked");
+                if (blackCheck)
+                    Debug.WriteLine("Black Checked");
+
+                if (turn == "WHITE")
+                    turn = "BLACK";
                 else
-                    board.ReturnPiece(holdingIndex, holdingPiece);
+                    turn = "WHITE";
 
             } else
             {
