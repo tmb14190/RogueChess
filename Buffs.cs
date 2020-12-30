@@ -61,7 +61,6 @@ namespace RogueChess
                             // check path is clear
                             if (boardPieces[index + 2] != null || boardPieces[index + 1] != null || rook == false)
                             {
-                                Debug.WriteLine("Removing Right");
                                 moves.Remove(index + 2);
                             }
                         }
@@ -78,7 +77,6 @@ namespace RogueChess
                             // check path is clear
                             if (boardPieces[index - 3] != null || boardPieces[index - 2] != null || boardPieces[index - 1] != null || rook == false)
                             {
-                                Debug.WriteLine("Removing Left");
                                 moves.Remove(index - 2);
                             }
                         }

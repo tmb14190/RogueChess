@@ -160,6 +160,17 @@ namespace RogueChess
 
         }
 
+        public void MovePiece(int origin, int destination)
+        {
+            if (origin >= 0 && origin <= 63 && destination >= 0 && destination <= 63)
+            {
+                boardPieces[destination] = boardPieces[origin];
+                boardPieces[origin] = null;
+                boardPieces[destination].AddMove(destination);
+                Debug.WriteLine(boardPieces[destination].GetName() + " moved from " + origin.ToString() + " to " + destination.ToString());
+            }
+        }
+
         /*
          * 
          */

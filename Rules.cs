@@ -123,6 +123,9 @@ namespace RogueChess
             return moves;
         }
 
+        /*
+         * 
+         */
         public static bool IsCheck(string colour, IPiece[] boardPieces, int[] lastMove)
         {
             int king = -1;

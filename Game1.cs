@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using RogueChess.Pieces;
+using RogueChess.AI;
 using System.Diagnostics;
 
 namespace RogueChess
@@ -25,6 +26,11 @@ namespace RogueChess
         List<int> holdingMoves;
         int[] lastMove;
         string turn;
+
+        bool AIWHITE;
+        bool AIBLACK;
+
+        int lastTime;
 
         private Vector2 cursorPos;
 
@@ -55,6 +61,10 @@ namespace RogueChess
             lastMove = new int[2];
             turn = "WHITE";
 
+            // set if we want AI playing
+            AIWHITE = true;
+            AIBLACK = true;
+
             base.Initialize();
         }
 
@@ -79,6 +89,27 @@ namespace RogueChess
 
             // update mouse position
             cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
+
+            // AI moves
+            if (((int)gameTime.TotalGameTime.TotalSeconds % 2 == 0) && ((int)gameTime.TotalGameTime.TotalSeconds != lastTime))
+            {
+                lastTime = (int)gameTime.TotalGameTime.TotalSeconds;
+                if ((turn == "WHITE" && AIWHITE) || (turn == "BLACK" && AIBLACK))
+                {
+                    int[] move;
+                    move = AIMain.GetMove(turn, board.boardPieces, lastMove);
+                    board.MovePiece(move[0], move[1]);
+                    board.boardPieces = Rules.ApplyRulesNewGameState(board.boardPieces, move[1], move[0], Content);
+
+                    lastMove[0] = move[0];
+                    lastMove[1] = move[1];
+
+                    if (turn == "WHITE")
+                        turn = "BLACK";
+                    else
+                        turn = "WHITE";
+                }
+            }
 
             // if piece is clicked
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && holdingPiece is null && IsMouseInsideWindow())
@@ -233,6 +264,8 @@ namespace RogueChess
 
                 // add piece to new square
                 board.AddPiece(destinationIndex, holdingPiece);
+
+                // Apply possible rules to new gamestate
                 board.boardPieces = Rules.ApplyRulesNewGameState(board.boardPieces, destinationIndex, holdingIndex, Content);
 
                 // hold last move info (used by en passant alone atm)
