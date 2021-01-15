@@ -4,6 +4,8 @@ using System.Text;
 using RogueChess.Pieces;
 using Microsoft.Xna.Framework.Content;
 using System.Diagnostics;
+using RogueChess.AI;
+using System.Linq;
 
 namespace RogueChess
 {
@@ -40,7 +42,7 @@ namespace RogueChess
         /*
          * 
          */
-        public static List<int> LegalMoves(int index, IPiece piece, IPiece[] boardPieces, int[] lastMove)
+        public static List<int> LegalMoves(int index, IPiece piece, IPiece[] boardPieces, int[] lastMove, bool checkMatters)
         {
             List<int> movements = piece.AllowedMoves(index);
             string colour = piece.GetColour();
@@ -120,6 +122,31 @@ namespace RogueChess
 
             moves = Buffs.CheckBuffedMoves(index, piece, boardPieces, moves, lastMove);
 
+            // Stops pieces moving if still in check afterwards, works, but slow as fucking for pieces that have lots of moves, idk what to do
+            if (checkMatters)
+            {
+                string antiColour;
+                if (piece.GetColour() == "WHITE")
+                    antiColour = "BLACK";
+                else
+                    antiColour = "WHITE";
+                foreach (int move in moves.ToList())
+                {
+                    IPiece[] newPieces = AIMain.SimulateMovePiece(boardPieces, index, move);
+
+                    IDictionary<int, List<int>> allNewMoves = AIMain.GetCurrentPossibleMoves(newPieces, antiColour, lastMove);
+
+                    // loop through instance to find if king can be taken
+                    foreach (KeyValuePair<int, List<int>> entry in allNewMoves)
+                        foreach (int m in entry.Value)
+                            if (AIMain.OneMoveEvaluation(newPieces, entry.Key, m) == 99)
+                                moves.Remove(move);
+
+                }
+            }
+
+
+
             return moves;
         }
 
@@ -145,7 +172,7 @@ namespace RogueChess
 
                 if (boardPieces[i]?.GetColour() == opponent)
                 {
-                    moves.AddRange(LegalMoves(i, boardPieces[i], boardPieces, lastMove));
+                    moves.AddRange(LegalMoves(i, boardPieces[i], boardPieces, lastMove, false));
                 } 
 
             }

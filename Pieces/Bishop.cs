@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace RogueChess.Pieces
 {
+    [Serializable]
     class Bishop : IPiece
     {
         Texture2D texture;
@@ -44,6 +45,15 @@ namespace RogueChess.Pieces
             {
                 Debug.WriteLine("Piece colour neither black or white");
             }
+        }
+
+        public Bishop(string colour, List<int> moves, string moveType, List<string> buffs)
+        {
+            this.texture = null;
+            this.colour = colour;
+            this.moves = moves;
+            this.moveType = moveType;
+            this.buffs = buffs;
         }
 
         public void AddMove(int move)

@@ -10,16 +10,16 @@ using System.Linq;
 namespace RogueChess.Pieces
 {
     [Serializable]
-    class King : IPiece
+    class Elephant : IPiece
     {
         Texture2D texture;
-        static string name = "KING";
+        static string name = "ELEPHANT";
         string colour;
         List<int> moves;
         string moveType;
         List<string> buffs;
 
-        public King(ContentManager content, string colour, (int, int) size)
+        public Elephant(ContentManager content, string colour, (int, int) size)
         {
             this.colour = colour;
             moves = new List<int>();
@@ -36,18 +36,18 @@ namespace RogueChess.Pieces
 
             if (colour == "WHITE")
             {
-                this.texture = content.Load<Texture2D>(folder + "White King");
+                this.texture = content.Load<Texture2D>("Elephant Knight");
             }
             else if (colour == "BLACK")
             {
-                this.texture = content.Load<Texture2D>(folder + "Black King");
+                this.texture = content.Load<Texture2D>("Elephant Knight");
             }
             else
             {
                 Debug.WriteLine("Piece colour neither black or white");
             }
         }
-        public King(string colour, List<int> moves, string moveType, List<string> buffs)
+        public Elephant(string colour, List<int> moves, string moveType, List<string> buffs)
         {
             this.texture = null;
             this.colour = colour;
@@ -67,31 +67,17 @@ namespace RogueChess.Pieces
         {
             List<int> futureMoves = new List<int>();
 
-            // vertical 
-            futureMoves.Add(index - 8);
-            futureMoves.Add(index + 8);
+            // up
+            if (index % 8 != 7 && index % 8 != 6)
+                futureMoves.Add(index - 14);
+            if (index % 8 != 0 && index % 8 != 1)
+                futureMoves.Add(index - 18);
 
-            // left side
-            if (index % 8 != 0)
-            {
-                futureMoves.Add(index - 9);
-                futureMoves.Add(index + 7);
-                futureMoves.Add(index - 1);
-            }
-
-            // right side
-            if (index % 8 != 7)
-            {
-                futureMoves.Add(index + 1);
-                futureMoves.Add(index - 7);
-                futureMoves.Add(index + 9);
-            }
-
-            if (moves.Count == 1 && buffs.Contains("CASTLE"))
-            {
-                futureMoves.Add(index + 2);
-                futureMoves.Add(index - 2);
-            }
+            // down
+            if (index % 8 != 0 && index % 8 != 1)
+                futureMoves.Add(index + 14);
+            if (index % 8 != 7 && index % 8 != 6)
+                futureMoves.Add(index + 18);
 
             foreach (int move in futureMoves.ToList())
             {
@@ -101,7 +87,20 @@ namespace RogueChess.Pieces
 
             return futureMoves;
         }
+        public Elephant(Texture2D texture, string colour, List<int> moves, string moveType, List<string> buffs)
+        {
+            this.texture = texture;
+            this.colour = colour;
+            this.moves = moves;
+            this.moveType = moveType;
+            this.buffs = buffs;
+        }
 
+        public Elephant Clone()
+        {
+            return new Elephant(texture, colour, moves, moveType, buffs);
+
+        }
         public void AddBuff(string buff)
         {
             buffs.Add(buff);
@@ -120,6 +119,7 @@ namespace RogueChess.Pieces
         {
             return name;
         }
+
         public string GetColour()
         {
             return colour;

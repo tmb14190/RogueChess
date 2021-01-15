@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using RogueChess.Pieces;
 using RogueChess.AI;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace RogueChess
 {
@@ -62,8 +63,8 @@ namespace RogueChess
             turn = "WHITE";
 
             // set if we want AI playing
-            AIWHITE = true;
-            AIBLACK = true;
+            AIWHITE = false;
+            AIBLACK = false;
 
             base.Initialize();
         }
@@ -90,14 +91,14 @@ namespace RogueChess
             // update mouse position
             cursorPos = new Vector2(Mouse.GetState().X, Mouse.GetState().Y);
 
-            // AI moves
+            // AI moves only does it every 2 seconds. thread sleep 2 seconds hard fucked the graphics
             if (((int)gameTime.TotalGameTime.TotalSeconds % 2 == 0) && ((int)gameTime.TotalGameTime.TotalSeconds != lastTime))
             {
                 lastTime = (int)gameTime.TotalGameTime.TotalSeconds;
                 if ((turn == "WHITE" && AIWHITE) || (turn == "BLACK" && AIBLACK))
                 {
                     int[] move;
-                    move = AIMain.GetMove(turn, board.boardPieces, lastMove);
+                    move = AIMain.GetMove(turn, board, lastMove);
                     board.MovePiece(move[0], move[1]);
                     board.boardPieces = Rules.ApplyRulesNewGameState(board.boardPieces, move[1], move[0], Content);
 
@@ -170,6 +171,8 @@ namespace RogueChess
 
             board.AddPiece(57, new Knight(Content, "WHITE", (132, 132)));
             board.AddPiece(62, new Knight(Content, "WHITE", (132, 132)));
+            //board.AddPiece(57, new Elephant(Content, "WHITE", (132, 132)));
+            //board.AddPiece(62, new Elephant(Content, "WHITE", (132, 132)));
 
             // load bishops
             board.AddPiece(2, new Bishop(Content, "BLACK", (132, 132)));
@@ -208,7 +211,7 @@ namespace RogueChess
 
         private void AddBuff(int index, string buff)
         {
-            board.boardPieces[index] = Buffs.AddBuff(board.boardPieces[index], "CASTLE");
+            board.boardPieces[index] = Buffs.AddBuff(board.boardPieces[index], buff);
         }
 
         /*
@@ -233,7 +236,8 @@ namespace RogueChess
                     Debug.WriteLine("Picked up " + piece.GetColour() + " " + piece.GetName());
 
                     // get possible moves
-                    holdingMoves = Rules.LegalMoves(index, piece, board.boardPieces, lastMove);
+                    Task<List<int>>.Factory.StartNew(() => Rules.LegalMoves(index, piece, board.boardPieces, lastMove, true));
+                    holdingMoves = Rules.LegalMoves(index, piece, board.boardPieces, lastMove, true);
 
                     // remove piece while its hovering
                     board.RemovePiece(index);

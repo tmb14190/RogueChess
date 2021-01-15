@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RogueChess.Pieces
 {
-    public interface IPiece
+    public interface IPiece 
     {
         /*
          * 
@@ -58,5 +58,11 @@ namespace RogueChess.Pieces
          */
         public List<int> GetMoveHistory();
 
+
     }
+}
+
+public interface ICloneable<T>
+{
+    T Clone();
 }

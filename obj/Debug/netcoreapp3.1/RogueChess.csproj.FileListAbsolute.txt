@@ -63,3 +63,5 @@ C:\Users\jackm\source\repos\RogueChess\obj\Debug\netcoreapp3.1\RogueChess.genrun
 C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\White Pawn.xnb
 C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Black Pawn.xnb
 C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Green_Square.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Content\Elephant Knight.xnb
+C:\Users\jackm\source\repos\RogueChess\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

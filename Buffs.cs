@@ -4,6 +4,7 @@ using System.Text;
 using RogueChess.Pieces;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Content;
+using System.Linq;
 
 namespace RogueChess
 {
@@ -20,7 +21,8 @@ namespace RogueChess
             switch (buff)
             {
                 case "CASTLE":
-                    piece.AddBuff("CASTLE");
+                    if (piece.GetName() == "KING")
+                        piece.AddBuff("CASTLE");
                     break;
                 case "QUEEN UPGRADE":
                     piece.AddBuff("QUEEN UPGRADE");
@@ -28,7 +30,9 @@ namespace RogueChess
                 case "EN PASSANT":
                     piece.AddBuff("EN PASSANT");
                     break;
-                // pawns attack moves
+                case "KNIGHT MOVES":
+                    piece.AddBuff("KNIGHT MOVES");
+                    break;
                 default:
                     Debug.WriteLine("No buff by name: " + buff);
                     break;
@@ -45,7 +49,6 @@ namespace RogueChess
             // if piece castle buffed
             foreach (string buff in piece.GetBuffs())
             {
-
                 switch (buff)
                 {
                     case "CASTLE":
@@ -130,6 +133,43 @@ namespace RogueChess
                                 }
                             }
                         }
+                        break;
+                    case "KNIGHT MOVES":
+                        // up
+                        if (index % 8 != 7 && index > 16)
+                            moves.Add(index - 15);
+                        if (index % 8 != 0 && index > 16)
+                            moves.Add(index - 17);
+
+                        // left
+                        if (index % 8 != 0 && index % 8 != 1)
+                        {
+                            if (index > 7)
+                                moves.Add(index - 10);
+                            if (index < 56)
+                                moves.Add(index + 6);
+                        }
+
+                        // right
+                        if (index % 8 != 7 && index % 8 != 6)
+                        {
+                            if (index > 7)
+                                moves.Add(index - 6);
+                            if (index < 56)
+                                moves.Add(index + 10);
+                        }
+
+                        // down
+                        if (index % 8 != 0 && index < 48)
+                            moves.Add(index + 15);
+                        if (index % 8 != 7 && index < 48)
+                            moves.Add(index + 17);
+
+                        foreach (int move in moves.ToList())
+                        {
+                            if (piece.GetColour() == boardPieces[move]?.GetColour())
+                                moves.Remove(move);
+                        }
 
                         break;
 
@@ -185,9 +225,6 @@ namespace RogueChess
                                 boardPieces[destinationIndex - 8] = null;
                         }
                     }
-                    
-
-
                     break;
 
                 default:

@@ -256,5 +256,6 @@ namespace RogueChess
             }
             return total;
         }
+
     }
 }

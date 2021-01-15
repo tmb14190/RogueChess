@@ -24,6 +24,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Queen.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/80 x 80/White Queen.xnb","TextureProcessor","Texture2DContent",5613,25685,0.0206205
 "C:/Users/jackm/source/repos/RogueChess/Content/80 x 80/White Rook.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/80 x 80/White Rook.xnb","TextureProcessor","Texture2DContent",2148,25685,0.0200029
 "C:/Users/jackm/source/repos/RogueChess/Content/Black Pawn.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Black Pawn.xnb","TextureProcessor","Texture2DContent",1310,40085,0.020801
+"C:/Users/jackm/source/repos/RogueChess/Content/Elephant Knight.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Elephant Knight.xnb","TextureProcessor","Texture2DContent",2274,24405,0.6744415
 "C:/Users/jackm/source/repos/RogueChess/Content/Green_Square.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Green_Square.xnb","TextureProcessor","Texture2DContent",367,40085,0.0178232
 "C:/Users/jackm/source/repos/RogueChess/Content/Grey_Square.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Grey_Square.xnb","TextureProcessor","Texture2DContent",320,40085,0.0194309
 "C:/Users/jackm/source/repos/RogueChess/Content/Purple_Square.png","C:/Users/jackm/source/repos/RogueChess/Content/bin/Windows/Purple_Square.xnb","TextureProcessor","Texture2DContent",323,40085,0.0185926

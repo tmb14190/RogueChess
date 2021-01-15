@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ecA0HFnPI9hxPZX1Xd4xQKYNCLd9880B0hYOkV9AaJTbLv4Dqvj2FMnEh+8NQFjSFcD5zLslffxLsRbuWPXI8Q==",
+  "dgSpecHash": "OD0bg1xfr3uwX3ludtpvcLkVb+lpLBPRSoHsQlJDncCH6yW80U1s6iQA/RC6iPGyrfegdbz5vKz++3s5TIM86Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\jackm\\source\\repos\\RogueChess\\RogueChess.csproj",
   "expectedPackageFiles": [
@@ -25,6 +25,7 @@
     "C:\\Users\\jackm\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
     "C:\\Users\\jackm\\.nuget\\packages\\monogame.framework.windowsdx\\3.8.0.1641\\monogame.framework.windowsdx.3.8.0.1641.nupkg.sha512",
     "C:\\Users\\jackm\\.nuget\\packages\\netstandard.library\\1.6.0\\netstandard.library.1.6.0.nupkg.sha512",
+    "C:\\Users\\jackm\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\jackm\\.nuget\\packages\\runtime.native.system\\4.0.0\\runtime.native.system.4.0.0.nupkg.sha512",
     "C:\\Users\\jackm\\.nuget\\packages\\runtime.native.system.io.compression\\4.1.0\\runtime.native.system.io.compression.4.1.0.nupkg.sha512",
     "C:\\Users\\jackm\\.nuget\\packages\\runtime.native.system.net.http\\4.0.1\\runtime.native.system.net.http.4.0.1.nupkg.sha512",
