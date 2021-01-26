@@ -5,4 +5,4 @@ to create a rogue like game within a chess environment. In this currently basic 
 unique piece abilities are treated as buffs, e.g. castling is a king buff, en passant and 
 pawn upgrade are pawn buffs, and check is treated as a rule. This allows for  different chess 
 variants to be implemented, and combining this with a rogue like deck building style, with rng and 
-predicative strategy, to create what is in essence a sophisticated chess puzzle game.
+predicative strategy, creates what is in essence a sophisticated chess puzzle game.
