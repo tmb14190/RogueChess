@@ -12,7 +12,7 @@ namespace RogueChess
     public static class Rules
     {
         /*
-         * 
+         * Applies new rules following a piece being placed on a new square
          */
         public static IPiece[] ApplyRulesNewGameState(IPiece[] boardPieces, int destinationIndex, int originIndex, ContentManager content)
         {
@@ -40,7 +40,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Get all possible legal moves for a piece, returned as an int List
          */
         public static List<int> LegalMoves(int index, IPiece piece, IPiece[] boardPieces, int[] lastMove, bool checkMatters)
         {
@@ -151,7 +151,8 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * DEPRECATED
+         * returns true if piece in check, else false
          */
         public static bool IsCheck(string colour, IPiece[] boardPieces, int[] lastMove)
         {

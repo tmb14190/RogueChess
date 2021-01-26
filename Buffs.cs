@@ -42,7 +42,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Logic for buffed moves, currently in switch, but should be expanded to individual files for each buff for scalability
          */
         public static List<int> CheckBuffedMoves(int index, IPiece piece, IPiece[] boardPieces, List<int> moves, int[] lastMove)
         {
@@ -184,7 +184,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Applies the further work needed after a buffed move played, e.g. moving the rook after a castle.
          */
         public static IPiece[] ApplyBuffedMoves(ContentManager content, IPiece[] boardPieces, int destinationIndex, int originIndex, string buff)
         {

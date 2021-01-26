@@ -13,7 +13,7 @@ using System.Linq;
 namespace RogueChess
 {
     /*
-     * 
+     * Board class holds all information about the board, primarily where the pieces are
      */
     public class Board
     {
@@ -35,7 +35,7 @@ namespace RogueChess
                                             "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1" };
 
         /*
-         * 
+         * Board constructor
          */
         public Board(ContentManager Content)
         {
@@ -50,7 +50,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Draw the board and pieces on the board
          */
         public void Draw(SpriteBatch sb)
         {
@@ -101,7 +101,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Draw possible moves
          */
         public void DrawMove(SpriteBatch sb, int index)
         {
@@ -109,7 +109,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Add hitbox rectangles to squares
          */
         public List<Rectangle> FillSquares(List<Rectangle> squares)
         {
@@ -134,7 +134,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Add bew piece to square, updating pieces moves history 
          */
         public void AddPiece(int index, IPiece piece)
         {
@@ -159,7 +159,9 @@ namespace RogueChess
 
 
         }
-
+        /*
+         *  Move a Piece between two squares, updating pieces moves history
+         */
         public void MovePiece(int origin, int destination)
         {
             if (origin >= 0 && origin <= 63 && destination >= 0 && destination <= 63)
@@ -172,7 +174,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * set sqaure to null
          */
         public void RemovePiece(int index)
         {
@@ -181,8 +183,8 @@ namespace RogueChess
 
         }
 
-        /*
-         * 
+        /* 
+         * return piece if exists on square, else null
          */
         public IPiece GetPiece(int index)
         {
@@ -197,7 +199,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Get the specific square of the mouse click based on the x and y coordinates
          */
         public int GetSquareIndexFromXY(int x, int y)
         {
@@ -245,7 +247,9 @@ namespace RogueChess
                 return -1;
             }
         }
-
+        /*
+         * Get total number of pieces currently on the board
+         */
         public int GetNumberOfPieces()
         {
             int total = 0;

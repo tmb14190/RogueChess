@@ -14,7 +14,9 @@ namespace RogueChess.AI
 {
     public static class AIMain
     {
-
+        /*
+         * Get the next move from the AI
+         */
         public static int[] GetMove(string colour, Board board, int[] lastMove)
         {
             int[] move = new int[2];
@@ -93,7 +95,9 @@ namespace RogueChess.AI
         {
             return 0;
         }
-
+        /*
+         * Take the best peice available (used to see if opponent is in check, that probablyt needs refactoring
+         */
         public static int OneMoveEvaluation(IPiece[] boardPieces, int origin, int destination)
         {
             int numPiecesOld = boardPieces.Count(s => s != null);
@@ -127,7 +131,9 @@ namespace RogueChess.AI
 
             return 0;
         }
-
+        /*
+         * Simulate a piece moving, used by AI, and also to see if one player is in check. The entire board array needs to be cloned by value, which is annoying af in C#
+         */
         public static IPiece[] SimulateMovePiece(IPiece[] boardPieces, int origin, int destination)
         {
             IPiece[] fakeBoard = new IPiece[64];

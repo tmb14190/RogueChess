@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace RogueChess
 {
     /*
-     * 
+     * Game clas holds the basic gameplay loop
      */
     public class Game1 : Game
     {
@@ -36,7 +36,7 @@ namespace RogueChess
         private Vector2 cursorPos;
 
         /*
-         * 
+         * Game constructor intialising
          */
         public Game1()
         {
@@ -50,7 +50,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Initialises all import variables
          */
         protected override void Initialize()
         {
@@ -70,7 +70,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * loads graphicsdevice, and calls the setup for piece placement
          */
         protected override void LoadContent()
         {
@@ -81,7 +81,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Update loop, checks for mouse interaction and AI moves
          */
         protected override void Update(GameTime gameTime)
         {
@@ -123,7 +123,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Draw any piece currently held by the mouse
          */
         protected override void Draw(GameTime gameTime)
         {
@@ -147,7 +147,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * Setup the board, currently hardcoded to basic chess
          */
         private void InitialiseBoard()
         {
@@ -208,14 +208,16 @@ namespace RogueChess
             }
 
         }
-
+        /*
+         * Add new buff to piece
+         */
         private void AddBuff(int index, string buff)
         {
             board.boardPieces[index] = Buffs.AddBuff(board.boardPieces[index], buff);
         }
 
         /*
-         * 
+         * Find the pece from mouse click, if a piece, pick it and with the mouse, and draw all possible legal moves
          */
         public void FindPieceOnClick()
         {
@@ -252,7 +254,7 @@ namespace RogueChess
         }
 
         /*
-         * 
+         * When mouse released find the destination for the piece, and apply any neccesary rules from the new gamestate
          */
         public void FindDestinationOnRelease()
         {
